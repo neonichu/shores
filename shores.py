@@ -79,8 +79,7 @@ if __name__ == '__main__':
 						if not is_in_cache(cache, curShowName, linked):
 							if dlfile(linked):
 								store_in_cache(cache, curShowName, linked)
-								print linked
-					break
+								print 'Fetched torrent file "%s".' % linked
 				inputFP.close()
 				store_cache(cache)
 				sys.exit(0)
