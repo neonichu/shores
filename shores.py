@@ -27,7 +27,7 @@ def dlfile(link):
 
 def list_shows():
 	result = []
-	inputFP = file('test.html')
+	inputFP = urllib.urlopen(BASE_URL)
 	for option in bsoup(inputFP)('option'):
 		optContents = ''.join(option.contents)
 		optValue = option['value']
@@ -72,7 +72,8 @@ if __name__ == '__main__':
 		for show in list_shows():
 			curShowName = show.keys()[0]
 			if curShowName.lower() == showName.lower():
-				inputFP = file('test.xml')
+				print 'Found matching show "%s".' % curShowName
+				inputFP = urllib.urlopen(FEED_URL % show[curShowName])
 				for item in rssparse(inputFP)['entries']:
 					for link in item['links']:
 						linked = link['href']
