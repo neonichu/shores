@@ -1,0 +1,4 @@
+syntax: glob
+test.html
+test.sh
+test.xml
