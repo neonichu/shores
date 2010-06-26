@@ -10,7 +10,7 @@ from feedparser import parse as rssparse
 BASE_URL = 'http://showrss.karmorra.info/?cs=feeds'
 FEED_URL = 'http://showrss.karmorra.info/feeds/%s.rss'
 CACHE_FILE = os.path.expandvars('$HOME/.shores')
-TARGET_DIR = '.'
+TARGET_DIR = '/Volumes/Datengrab NG 1/TV Series'
 
 
 def dlfile(link):
