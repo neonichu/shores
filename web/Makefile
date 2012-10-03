@@ -1,6 +1,9 @@
-.PHONY: all clean
+.PHONY: all clean deploy
 
 FILES = index.html
+
+deploy: all
+	scp $(FILES) vu0:vu0.org/projects/shores
 
 all: $(FILES)
 

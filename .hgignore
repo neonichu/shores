@@ -1,6 +1,8 @@
 syntax: glob
 test.html
+test.py
 test.sh
 test.xml
 *.torrent
 *.html
+*.pyc
