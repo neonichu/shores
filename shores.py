@@ -76,14 +76,14 @@ def store_cache(to_cache):
     outputFP.close()
 
 
-def handle_feed(feed_url, cache, feed_id):
+def handle_feed(feed_url, cache, feed_id, targetDir):
     inputFP = urllib.urlopen(feed_url)
     for item in rssparse(inputFP)['entries']:
         for link in item['links']:
             linked = link['href']
             if not is_in_cache(cache, feed_id, linked):
                 try:
-                    if dlfile(linked):
+                    if dlfile(linked, targetDir):
                         store_in_cache(cache, feed_id, linked)
                         print 'Fetched torrent file "%s".' % linked
                 except Exception, e:
@@ -91,12 +91,13 @@ def handle_feed(feed_url, cache, feed_id):
     inputFP.close()
 
 
-def handle_show(showName, listOfShows):
+def handle_show(showName, listOfShows, targetDir):
     for show in listOfShows:
         curShowName = show.keys()[0]
         if curShowName.lower() == showName.lower():
             print 'Found matching show "%s".' % curShowName
-            handle_feed(FEED_URL % show[curShowName], cache, curShowName)
+            handle_feed(FEED_URL % show[curShowName], cache, curShowName,
+                    targetDir)
             store_cache(cache)
             return
     print 'Show "%s" does not exist.' % showName
@@ -125,11 +126,11 @@ if __name__ == '__main__':
 
             watched = WatchedLi(watchedLiUser, watchedLiPass)
             for show in watched.shows():
-                handle_show(show, listOfShows)
+                handle_show(show, listOfShows, targetDir)
         except:
             print 'Available shows:'
             for show in listOfShows:
                 print '\t%s' % show.keys()[0]
     else:
         showName = ' '.join(sys.argv[1:])
-        handle_show(showName, listOfShows)
+        handle_show(showName, listOfShows, targetDir)
