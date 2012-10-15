@@ -8,7 +8,7 @@ import cookielib
 import mechanize
 from BeautifulSoup import BeautifulSoup as soup
 
-BASE_URL = 'http://alpha.watched.li/user/index'
+BASE_URL = 'http://watched.li/user/index'
 
 
 class WatchedLi:
@@ -29,7 +29,7 @@ class WatchedLi:
         show_section = index('section', {'class': 'shows'})[0]
 
         for div in show_section('div'):
-            if not div.has_key('class') or not div['class'].startswith('show-tile show-'):
+            if not div.has_key('class') or not div['class'].startswith('show-tile '):
                 continue
             for divInner in div('div', {'class': 'inner'}):
                 for h2 in divInner('h2'):
