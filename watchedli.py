@@ -25,7 +25,7 @@ class WatchedLi:
     def shows(self):
         shows = []
 
-        index = soup(self.browser.response())
+        index = soup(self.browser.response(), convertEntities=soup.HTML_ENTITIES)
         show_section = index('section', {'class': 'shows'})[0]
 
         for div in show_section('div'):
